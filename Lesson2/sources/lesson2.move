@@ -4,7 +4,7 @@ module lesson2::c2c {
     use sui::coin::Coin;
     use sui::event;
 
-    const EAmountNotEnought: u64 = 0;
+    const EAmountNotEnough: u64 = 0;
     const EProvidedCoinNotFound: u64 = 1;
     const ENotEmpty: u64 = 2;
 
@@ -50,7 +50,7 @@ module lesson2::c2c {
     ): Coin<P> {
         let coin_value = requested_coin.value();
         if (coin_value < escrow_obj.requested_amount) {
-            abort EAmountNotEnought
+            abort EAmountNotEnough
         };
 
         let creator = escrow_obj.creator;
