@@ -3,7 +3,7 @@ module lesson4::lesson4_tests {
 
     use sui::test_scenario as ts;
     use lesson4::fortune::{Self, Treasury};
-    use lesson4::fortune_bag;
+    use lesson4::fortune_bag::{Self, FortuneBag};
 
     #[test]
     fun test_no_coin_mint_bag() {
@@ -24,13 +24,18 @@ module lesson4::lesson4_tests {
                 &mut treasury, 100_000_000_000, ts::ctx(s),
             );
 
-            // TODO: try to get a bag
+            // TODO: try to get a bag!
 
             fortune::flash_burn(&mut treasury, coin, recipit);
             ts::return_shared(treasury);
         };
+        
+        ts::next_tx(s, attacker);
+        {
+            let bag_ids = ts::ids_for_sender<FortuneBag>(s);
+            assert!(!bag_ids.is_empty(), 0);
+        };
 
         ts::end(scenario_val);
     }
-
 }
