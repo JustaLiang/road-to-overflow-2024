@@ -65,6 +65,34 @@ module lesson4::fortune {
         coin::mint(&mut treasury.cap, value, ctx)
     }
 
+    public struct FlashMintRecipit {
+        value: u64,
+    }
+
+    public fun flash_mint(
+        treasury: &mut Treasury,
+        value: u64,
+        ctx: &mut TxContext,
+    ): (Coin<FORTUNE>, FlashMintRecipit) {
+        let coin = coin::mint(&mut treasury.cap, value, ctx);
+        let recipit = FlashMintRecipit { value };
+        (coin, recipit)
+    }
+
+    public fun flash_burn(
+        treasury: &mut Treasury,
+        coin: Coin<FORTUNE>,
+        recipit: FlashMintRecipit,
+    ) {
+        let FlashMintRecipit {
+            value: recipit_value,
+        } = recipit;
+        if (coin.value() != recipit_value) {
+            abort 123
+        };
+        burn(treasury, coin.into_balance());
+    }
+
     // Entry funs
 
     entry fun mint_to(
@@ -85,6 +113,14 @@ module lesson4::fortune {
         balance: Balance<FORTUNE>,
     ) {
         balance::decrease_supply(treasury.cap.supply_mut(), balance);
+    }
+
+    //  Test-only funs
+
+    #[test_only]
+    public fun init_for_testing(ctx: &mut TxContext) {
+        use sui::test_utils;
+        init(test_utils::create_one_time_witness<FORTUNE>(), ctx);
     }
 
 }
