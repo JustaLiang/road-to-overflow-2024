@@ -137,4 +137,23 @@ module lesson2::c2c {
         object::delete(id);
         provided.destroy_none();
     }
+
+    // Getter funs
+
+    public fun creator<P, R>(obj: &EscrowObj<P, R>): address {
+        obj.creator
+    }
+
+    public fun provided_value<P, R>(obj: &EscrowObj<P, R>): Option<u64> {
+        if (obj.provided.is_some()) {
+            let coin_ref = obj.provided.borrow();
+            option::some(coin_ref.value())
+        } else {
+            option::none()
+        }
+    }
+
+    public fun requested_amount<P, R>(obj: &EscrowObj<P, R>): u64 {
+        obj.requested_amount
+    }
 }
