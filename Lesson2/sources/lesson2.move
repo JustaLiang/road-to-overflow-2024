@@ -49,6 +49,8 @@ module lesson2::c2c {
         id: ID,
     }
 
+    // Public funs
+
     public fun create<P, R>(
         coin: Coin<P>,
         requested_amount: u64,
