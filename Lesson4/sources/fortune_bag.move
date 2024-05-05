@@ -8,7 +8,7 @@ module lesson4::fortune_bag {
     use sui::display;
     use sui::coin::{Self, Coin};
     use sui::balance::Balance;
-    use lesson4::fortune::FORTUNE;
+    use lesson4::fortune::{Self, FORTUNE, Treasury};
 
     // Errors
 
@@ -106,6 +106,19 @@ module lesson4::fortune_bag {
             bag.state = NOT_FULL;
         };
         coin
+    }
+
+    public fun burn(
+        bag: FortuneBag,
+        treasury: &mut Treasury,
+    ) {
+        let FortuneBag {
+            id,
+            state: _,
+            content,
+        } = bag;
+        id.delete();
+        fortune::burn(treasury, content);
     }
 
     // entry funs

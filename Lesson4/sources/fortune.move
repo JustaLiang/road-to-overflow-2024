@@ -4,6 +4,7 @@ module lesson4::fortune {
     // Dependencies
 
     use sui::coin::{Self, Coin, TreasuryCap};
+    use sui::balance::{Self, Balance};
     use sui::url;
 
     // One Time Witness
@@ -64,6 +65,8 @@ module lesson4::fortune {
         coin::mint(&mut treasury.cap, value, ctx)
     }
 
+    // Entry funs
+
     entry fun mint_to(
         treasury: &mut Treasury,
         cap: &AdminCap,
@@ -74,4 +77,14 @@ module lesson4::fortune {
         let coin = mint(treasury, cap, value, ctx);
         transfer::public_transfer(coin, recipient);
     }
+
+    // Package funs
+
+    public(package) fun burn(
+        treasury: &mut Treasury,
+        balance: Balance<FORTUNE>,
+    ) {
+        balance::decrease_supply(treasury.cap.supply_mut(), balance);
+    }
+
 }
