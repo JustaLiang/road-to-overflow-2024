@@ -16,8 +16,8 @@ module lesson4::fortune_bag {
 
     // Constants
 
-    const NOT_FULL: u8 = 0;
-    const FULL: u8 = 1;
+    const FULL: u8 = 0;
+    const NOT_FULL: u8 = 1;
     const THRESHOLD: u64 = 100_000_000_000;
 
     // One Time Witness
