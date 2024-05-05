@@ -25,17 +25,16 @@ module lesson4::fortune {
 
     fun init(otw: FORTUNE, ctx: &mut TxContext) {
         // create fungible token
+        let url = url::new_unsafe_from_bytes(
+            b"https://aqua-natural-grasshopper-705.mypinata.cloud/ipfs/Qmeyz3FijdgyR9AMqg84nzpQR4sXbZd1M4UBhQ9Dz99sYE"
+        );
         let (cap, metadata) = coin::create_currency(
             otw,
             9,
             b"FTN",
             b"Fortune Coin",
             b"Collect Fortune to get special NFT",
-            option::some(
-                url::new_unsafe_from_bytes(
-                    b"https://aqua-natural-grasshopper-705.mypinata.cloud/ipfs/Qmeyz3FijdgyR9AMqg84nzpQR4sXbZd1M4UBhQ9Dz99sYE"
-                )
-            ),
+            option::some(url),
             ctx,
         );
 
