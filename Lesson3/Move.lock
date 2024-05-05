@@ -2,7 +2,7 @@
 
 [move]
 version = 2
-manifest_digest = "1C5ECAE1C8DDD0CC61B4187A4DE87A3378755BBCF337A619F28444EB0333CA2B"
+manifest_digest = "50F65F3BC942C056951CF9045A015C5F8F546841FC785675495AF817710EBF90"
 deps_digest = "3C4103934B1E040BB6B23F1D610B4EF9F2F1166A50A104EADCF77467C004C600"
 dependencies = [
   { name = "Lesson2" },
@@ -33,3 +33,11 @@ dependencies = [
 compiler-version = "1.24.0"
 edition = "2024.beta"
 flavor = "sui"
+
+[env]
+
+[env.devnet]
+chain-id = "aba66e60"
+original-published-id = "0xa61946f8b107cd3c86fdf4e3d7faa2521680570ac70e90031c0b02926c59ed31"
+latest-published-id = "0xa61946f8b107cd3c86fdf4e3d7faa2521680570ac70e90031c0b02926c59ed31"
+published-version = "1"

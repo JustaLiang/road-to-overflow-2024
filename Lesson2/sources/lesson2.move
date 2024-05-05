@@ -3,6 +3,7 @@ module lesson2::c2c {
 
     // Dependencies
 
+    use std::type_name;
     use sui::coin::Coin;
     use sui::event;
 
@@ -12,6 +13,7 @@ module lesson2::c2c {
     const EProvidedCoinNotFound: u64 = 1;
     const ENotEmpty: u64 = 2;
     const ENoAuthToCancel: u64 = 3;
+    const ESameCoinType: u64 = 4;
 
     // Objects
 
@@ -56,6 +58,9 @@ module lesson2::c2c {
         requested_amount: u64,
         ctx: &mut TxContext,
     ) {
+        if (type_name::get<P>() == type_name::get<R>()) {
+            abort ESameCoinType
+        };
         let provided_amount = coin.value();
         let creator = ctx.sender();
         let obj = EscrowObj<P, R> {
