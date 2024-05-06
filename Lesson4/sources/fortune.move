@@ -7,6 +7,10 @@ module lesson4::fortune {
     use sui::balance::{Self, Balance};
     use sui::url;
 
+    // Errors
+
+    const EFlashBurnInvalidValue: u64 = 0;
+
     // One Time Witness
 
     public struct FORTUNE has drop {}
@@ -88,7 +92,7 @@ module lesson4::fortune {
             value: recipit_value,
         } = recipit;
         if (coin.value() != recipit_value) {
-            abort 123
+            abort EFlashBurnInvalidValue
         };
         burn(treasury, coin.into_balance());
     }
