@@ -21,7 +21,7 @@ module lesson4::lesson4_tests {
         {
             let mut treasury = ts::take_shared<Treasury>(s);
             let (coin, recipit) = fortune::flash_mint(
-                &mut treasury, 100_000_000_000, ts::ctx(s),
+                &mut treasury, 1, ts::ctx(s),
             );
 
             // TODO: try to get a bag!
