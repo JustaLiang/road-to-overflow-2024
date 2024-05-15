@@ -46,10 +46,10 @@ const BasicContainer = () => {
       target: `${PACKAGE_ID}::fortune_bag::mint`,
       arguments: [fortuneCoin],
     });
-    const [fortuneValueInBag] = tx.moveCall({
-      target: `${PACKAGE_ID}::fortune_bag::fortune_value`,
-      arguments: [fortuneBag],
-    });
+    // const [fortuneValueInBag] = tx.moveCall({
+    //   target: `${PACKAGE_ID}::fortune_bag::fortune_value`,
+    //   arguments: [fortuneBag],
+    // });
 
     // 3. take from bag
     const [repayment] = tx.moveCall({
