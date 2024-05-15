@@ -25,6 +25,10 @@ module lesson4::lesson4_tests {
             );
 
             // TODO: try to get a bag!
+            let ctx = ts::ctx(s);
+            let mut bag = fortune_bag::mint(coin, ctx);
+            let coin = fortune_bag::take(&mut bag, 1, ctx);
+            transfer::public_transfer(bag, attacker);
 
             fortune::flash_burn(&mut treasury, coin, recipit);
             ts::return_shared(treasury);
